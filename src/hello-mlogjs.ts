@@ -1,15 +1,25 @@
-let PID = 1;
-let UTYPE: UnitSymbol = Units.poly; // getVar<UnitSymbol>('@new-horizon-gather');
-const _UCOUNT = 5;
-let UCOUNT = _UCOUNT;
-const units = new DynamicArray<AnyUnit>(_UCOUNT);
+const _MAX_CAPACITY = 128;
+const _DEFAULT_UCOUNT = 5;
+
 let messageStatus = getBuilding('message1');
 let messageDebug = getBuilding('message2');
 let switchOnOff = getBuilding('switch1');
 
+let PID = 1;
+let UTYPE: UnitSymbol = Units.poly; // getVar<UnitSymbol>('@new-horizon-gather');
+let UCOUNT = _DEFAULT_UCOUNT;
+
+const units = new DynamicArray<AnyUnit>(_MAX_CAPACITY);
+
 if (!switchOnOff.enabled) {
     endScript();
 }
+if (UCOUNT > _MAX_CAPACITY) {
+    print`Unit count (UCOUNT=${UCOUNT}) is too high !\nmax. ${_MAX_CAPACITY}`;
+    printFlush(messageStatus);
+    endScript();
+}
+
 
 /** Setup :  bind and store units  */
 
@@ -23,7 +33,7 @@ for (let i = 0; i < UCOUNT; i++) {
             continue;
         } 
 
-        unchecked(units.push(Vars.unit));
+        units.push(Vars.unit);
 
         unitControl.flag(PID);
     }
@@ -38,16 +48,16 @@ while (switchOnOff.enabled) {
     for (let i = 0; i < units.length; i++) {
         print`Controlling unit ${i}\n`;
         
-        tryAction(unchecked(units[i]), i);
+        tryAction(units[i], i);
 
         printFlush(messageDebug);
     }
 }
 
-/** Restore bound units ? */
+/** Restore bound units */
 
 for (let i = 0; i < units.length; i++) {
-    unitBind(unchecked(units[i]));
+    units[i];
     unitControl.flag(0);
 }
 
