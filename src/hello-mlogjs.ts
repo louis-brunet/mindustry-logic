@@ -2,6 +2,7 @@ const PID = 1;
 const UTYPE: UnitSymbol = Units.poly; // getVar<UnitSymbol>('@new-horizon-gather');
 const UCOUNT = 5;
 const messageStatus = getBuilding('message1');
+const messageDebug = getBuilding('message2');
 
 /** Setup :  bind and store units  */
 
@@ -22,12 +23,17 @@ for (let i = 0; i < UCOUNT; i++) {
     }
 }
 
-print`size = ${units.size} ; length = ${units.length}`;
-printFlush();
+print`Bound units : ${units.length}/${units.size}`;
+printFlush(messageStatus);
 
 /** Units are initialized */
 
-//while (true) {}
+while (true) {
+    for (let i = 0; i < units.length; i++) {
+        print`Controlling unit ${i}`;
+        printFlush(messageDebug);
+    }
+}
 
 /** Restore bound units ? */
 
