@@ -1,0 +1,64 @@
+print "initializing proc. PID = "
+print 1
+print ", UTYPE="
+print @poly
+print "\n"
+set units:9:6.&len 0
+set i:11:9 0
+jump 24 greaterThanEq i:11:9 5
+ubind @poly
+jump 22 strictEqual @unit null
+sensor &t0 @unit @flag
+jump 14 strictEqual &t0 0
+op sub i:11:9 i:11:9 1
+jump 22 always
+jump 21 lessThan units:9:6.&len 0
+jump 21 greaterThan units:9:6.&len 4
+set units:9:6.&write @unit
+set units:9:6.&rt 20
+op mul &t1 units:9:6.&len 2
+op add @counter 44 &t1
+op add units:9:6.&len units:9:6.&len 1
+ucontrol flag 1
+op add i:11:9 i:11:9 1
+jump 7 always
+print "size = "
+print 5
+print " ; length = "
+print units:9:6.&len
+printflush message1
+set i:34:9 0
+jump 42 greaterThanEq i:34:9 units:9:6.&len
+set &t0 null
+jump 38 lessThan i:34:9 0
+jump 38 greaterThan i:34:9 4
+set units:9:6.&rt 37
+op mul &t1 i:34:9 2
+op add @counter 54 &t1
+set &t0 units:9:6.&read
+ubind &t0
+ucontrol flag 0
+op add i:34:9 i:34:9 1
+jump 30 always
+end
+end
+set units:9:6->0 units:9:6.&write
+set @counter units:9:6.&rt
+set units:9:6->1 units:9:6.&write
+set @counter units:9:6.&rt
+set units:9:6->2 units:9:6.&write
+set @counter units:9:6.&rt
+set units:9:6->3 units:9:6.&write
+set @counter units:9:6.&rt
+set units:9:6->4 units:9:6.&write
+set @counter units:9:6.&rt
+set units:9:6.&read units:9:6->0
+set @counter units:9:6.&rt
+set units:9:6.&read units:9:6->1
+set @counter units:9:6.&rt
+set units:9:6.&read units:9:6->2
+set @counter units:9:6.&rt
+set units:9:6.&read units:9:6->3
+set @counter units:9:6.&rt
+set units:9:6.&read units:9:6->4
+set @counter units:9:6.&rt
