@@ -32,6 +32,8 @@ while (true) {
     for (let i = 0; i < units.length; i++) {
         print`Controlling unit ${i}`;
         printFlush(messageDebug);
+
+        tryAction(units[i], i);
     }
 }
 
@@ -43,3 +45,9 @@ for (let i = 0; i < units.length; i++) {
 }
 
 endScript();
+
+
+function tryAction (unit: AnyUnit, index: number) {
+    print('todo : action ', unit, index);
+}
+

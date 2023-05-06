@@ -17,7 +17,7 @@ jump 21 greaterThan units:10:6.&len 4
 set units:10:6.&write @unit
 set units:10:6.&rt 20
 op mul &t1 units:10:6.&len 2
-op add @counter 52 &t1
+op add @counter 62 &t1
 op add units:10:6.&len units:10:6.&len 1
 ucontrol flag 1
 op add i:12:9 i:12:9 1
@@ -28,26 +28,36 @@ print "/"
 print 5
 printflush message1
 set i:32:13 0
-jump 36 greaterThanEq i:32:13 units:10:6.&len
+jump 46 greaterThanEq i:32:13 units:10:6.&len
 print "Controlling unit "
 print i:32:13
 printflush message2
+set unit:50:20 null
+jump 41 lessThan i:32:13 0
+jump 41 greaterThan i:32:13 4
+set units:10:6.&rt 40
+op mul &t0 i:32:13 2
+op add @counter 72 &t0
+set unit:50:20 units:10:6.&read
+print "todo : action "
+print unit:50:20
+print i:32:13
 op add i:32:13 i:32:13 1
 jump 30 always
 jump 29 always
-set i:40:9 0
-jump 50 greaterThanEq i:40:9 units:10:6.&len
+set i:42:9 0
+jump 60 greaterThanEq i:42:9 units:10:6.&len
 set &t0 null
-jump 46 lessThan i:40:9 0
-jump 46 greaterThan i:40:9 4
-set units:10:6.&rt 45
-op mul &t1 i:40:9 2
-op add @counter 62 &t1
+jump 56 lessThan i:42:9 0
+jump 56 greaterThan i:42:9 4
+set units:10:6.&rt 55
+op mul &t1 i:42:9 2
+op add @counter 72 &t1
 set &t0 units:10:6.&read
 ubind &t0
 ucontrol flag 0
-op add i:40:9 i:40:9 1
-jump 38 always
+op add i:42:9 i:42:9 1
+jump 48 always
 end
 end
 set units:10:6->0 units:10:6.&write
