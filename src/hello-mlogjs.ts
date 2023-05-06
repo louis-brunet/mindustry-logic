@@ -5,6 +5,11 @@ let UCOUNT = _UCOUNT;
 const units = new DynamicArray<AnyUnit>(_UCOUNT);
 let messageStatus = getBuilding('message1');
 let messageDebug = getBuilding('message2');
+let switchOnOff = getBuilding('switch1');
+
+if (!switchOnOff.enabled) {
+    endScript();
+}
 
 /** Setup :  bind and store units  */
 
@@ -29,7 +34,7 @@ printFlush(messageStatus);
 
 /** Units are initialized */
 
-while (true) {
+while (switchOnOff.enabled) {
     for (let i = 0; i < units.length; i++) {
         print`Controlling unit ${i}\n`;
         
