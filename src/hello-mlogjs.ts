@@ -30,10 +30,11 @@ printFlush(messageStatus);
 
 while (true) {
     for (let i = 0; i < units.length; i++) {
-        print`Controlling unit ${i}`;
-        printFlush(messageDebug);
-
+        print`Controlling unit ${i}\n`;
+        
         tryAction(units[i], i);
+        
+        printFlush(messageDebug);
     }
 }
 
