@@ -1,83 +1,80 @@
+set PID:1:4 1
+set UTYPE:2:4 @poly
+set UCOUNT:4:4 5
+set units:5:6.&len 0
+set messageStatus:6:4 message1
+set messageDebug:7:4 message2
 print "initializing proc. PID = "
-print 1
+print PID:1:4
 print ", UTYPE="
-print @poly
+print UTYPE:2:4
 print "\n"
-set units:10:6.&len 0
-set i:12:9 0
-jump 24 greaterThanEq i:12:9 5
-ubind @poly
-jump 22 strictEqual @unit null
+set i:13:9 0
+jump 27 greaterThanEq i:13:9 UCOUNT:4:4
+ubind UTYPE:2:4
+jump 25 strictEqual @unit null
 sensor &t0 @unit @flag
-jump 14 strictEqual &t0 0
-op sub i:12:9 i:12:9 1
-jump 22 always
-jump 21 lessThan units:10:6.&len 0
-jump 21 greaterThan units:10:6.&len 4
-set units:10:6.&write @unit
-set units:10:6.&rt 20
-op mul &t1 units:10:6.&len 2
-op add @counter 63 &t1
-op add units:10:6.&len units:10:6.&len 1
-ucontrol flag 1
-op add i:12:9 i:12:9 1
-jump 7 always
+jump 19 strictEqual &t0 0
+op sub i:13:9 i:13:9 1
+jump 25 always
+set units:5:6.&write @unit
+set units:5:6.&rt 23
+op mul &t1 units:5:6.&len 2
+op add @counter 60 &t1
+op add units:5:6.&len units:5:6.&len 1
+ucontrol flag PID:1:4
+op add i:13:9 i:13:9 1
+jump 12 always
 print "Bound units : "
-print units:10:6.&len
+print units:5:6.&len
 print "/"
 print 5
-printflush message1
-set i:32:13 0
-jump 47 greaterThanEq i:32:13 units:10:6.&len
+printflush messageStatus:6:4
+set i:33:13 0
+jump 47 greaterThanEq i:33:13 units:5:6.&len
 print "Controlling unit "
-print i:32:13
+print i:33:13
 print "\n"
-set unit:51:20 null
-jump 41 lessThan i:32:13 0
-jump 41 greaterThan i:32:13 4
-set units:10:6.&rt 40
-op mul &t0 i:32:13 2
-op add @counter 73 &t0
-set unit:51:20 units:10:6.&read
+set units:5:6.&rt 40
+op mul &t0 i:33:13 2
+op add @counter 70 &t0
+set unit:52:20 units:5:6.&read
 print "todo : action "
-print unit:51:20
-print i:32:13
-printflush message2
-op add i:32:13 i:32:13 1
-jump 30 always
-jump 29 always
-set i:43:9 0
-jump 61 greaterThanEq i:43:9 units:10:6.&len
-set &t0 null
-jump 57 lessThan i:43:9 0
-jump 57 greaterThan i:43:9 4
-set units:10:6.&rt 56
-op mul &t1 i:43:9 2
-op add @counter 73 &t1
-set &t0 units:10:6.&read
+print unit:52:20
+print i:33:13
+printflush messageDebug:7:4
+op add i:33:13 i:33:13 1
+jump 33 always
+jump 32 always
+set i:44:9 0
+jump 58 greaterThanEq i:44:9 units:5:6.&len
+set units:5:6.&rt 53
+op mul &t1 i:44:9 2
+op add @counter 70 &t1
+set &t0 units:5:6.&read
 ubind &t0
 ucontrol flag 0
-op add i:43:9 i:43:9 1
+op add i:44:9 i:44:9 1
 jump 49 always
 end
 end
-set units:10:6->0 units:10:6.&write
-set @counter units:10:6.&rt
-set units:10:6->1 units:10:6.&write
-set @counter units:10:6.&rt
-set units:10:6->2 units:10:6.&write
-set @counter units:10:6.&rt
-set units:10:6->3 units:10:6.&write
-set @counter units:10:6.&rt
-set units:10:6->4 units:10:6.&write
-set @counter units:10:6.&rt
-set units:10:6.&read units:10:6->0
-set @counter units:10:6.&rt
-set units:10:6.&read units:10:6->1
-set @counter units:10:6.&rt
-set units:10:6.&read units:10:6->2
-set @counter units:10:6.&rt
-set units:10:6.&read units:10:6->3
-set @counter units:10:6.&rt
-set units:10:6.&read units:10:6->4
-set @counter units:10:6.&rt
+set units:5:6->0 units:5:6.&write
+set @counter units:5:6.&rt
+set units:5:6->1 units:5:6.&write
+set @counter units:5:6.&rt
+set units:5:6->2 units:5:6.&write
+set @counter units:5:6.&rt
+set units:5:6->3 units:5:6.&write
+set @counter units:5:6.&rt
+set units:5:6->4 units:5:6.&write
+set @counter units:5:6.&rt
+set units:5:6.&read units:5:6->0
+set @counter units:5:6.&rt
+set units:5:6.&read units:5:6->1
+set @counter units:5:6.&rt
+set units:5:6.&read units:5:6->2
+set @counter units:5:6.&rt
+set units:5:6.&read units:5:6->3
+set @counter units:5:6.&rt
+set units:5:6.&read units:5:6->4
+set @counter units:5:6.&rt

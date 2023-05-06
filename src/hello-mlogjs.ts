@@ -1,13 +1,14 @@
-const PID = 1;
-const UTYPE: UnitSymbol = Units.poly; // getVar<UnitSymbol>('@new-horizon-gather');
-const UCOUNT = 5;
-const messageStatus = getBuilding('message1');
-const messageDebug = getBuilding('message2');
+let PID = 1;
+let UTYPE: UnitSymbol = Units.poly; // getVar<UnitSymbol>('@new-horizon-gather');
+const _UCOUNT = 5;
+let UCOUNT = _UCOUNT;
+const units = new DynamicArray<AnyUnit>(_UCOUNT);
+let messageStatus = getBuilding('message1');
+let messageDebug = getBuilding('message2');
 
 /** Setup :  bind and store units  */
 
 print`initializing proc. PID = ${PID}, UTYPE=${UTYPE}\n`;
-const units = new DynamicArray<AnyUnit>(UCOUNT);
 
 for (let i = 0; i < UCOUNT; i++) {
     unitBind(UTYPE);
@@ -17,7 +18,7 @@ for (let i = 0; i < UCOUNT; i++) {
             continue;
         } 
 
-        units.push(Vars.unit);
+        unchecked(units.push(Vars.unit));
 
         unitControl.flag(PID);
     }
@@ -32,8 +33,8 @@ while (true) {
     for (let i = 0; i < units.length; i++) {
         print`Controlling unit ${i}\n`;
         
-        tryAction(units[i], i);
-        
+        tryAction(unchecked(units[i]), i);
+
         printFlush(messageDebug);
     }
 }
@@ -41,7 +42,7 @@ while (true) {
 /** Restore bound units ? */
 
 for (let i = 0; i < units.length; i++) {
-    unitBind(units[i]);
+    unitBind(unchecked(units[i]));
     unitControl.flag(0);
 }
 
