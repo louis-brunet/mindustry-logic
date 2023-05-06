@@ -6,8 +6,9 @@ let messageDebug = getBuilding('message2');
 let switchOnOff = getBuilding('switch1');
 
 let PID = 1;
-let UTYPE: UnitSymbol = Units.poly; // getVar<UnitSymbol>('@new-horizon-gather');
+let UTYPE: UnitSymbol = getVar<UnitSymbol>('@new-horizon-gather');
 let UCOUNT = _DEFAULT_UCOUNT;
+let ITYPE: ItemSymbol = getVar<ItemSymbol>('@new-horizon-zeta');
 
 const units = new DynamicArray<AnyUnit>(_MAX_CAPACITY);
 
@@ -68,5 +69,24 @@ endScript();
 function tryAction (index: number) {
     const { unit } = Vars;
     print('todo : action ', unit, index);
+
+    if (unit.totalItems >= unit.itemCapacity) {
+        // need to drop items in core
+        const [found, coreX, coreY, coreBuilding] = unitLocate.building({group: "core", enemy: false});
+        if (found) {
+            unitControl.approach({x: coreX, y: coreY, radius: 5});
+            unitControl.itemDrop(coreBuilding, 99999999);
+        }
+    } else {
+        // can mine more items, look for desired item type
+        const [found, oreX, oreY] = unitLocate.ore(ITYPE);
+        if (found) {
+            unitControl.approach({x: oreX, y: oreY, radius: 5});
+            unitControl.mine(oreX, oreY);
+            
+        } else {
+            // TODO
+        }
+    }
 }
 

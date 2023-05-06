@@ -4,6 +4,6 @@
     "typescript": "^5.0.4"
   },
   "scripts": {
-    "build": "SRC=./src && find $SRC -maxdepth 1 -type f -name \"*.ts\"  -exec sh -c 'npx mlogjs {} ./build/\"$(basename {} .ts)\".mlog' \\;"
+    "build": "SRC=./src/scripts && find $SRC -maxdepth 1 -type f -name \"*.ts\"  -exec sh -c 'npx mlogjs {} ./build/\"$(basename {} .ts)\".mlog' \\;"
   }
 }
