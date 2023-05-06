@@ -33,7 +33,7 @@ jump 37 greaterThan units:12:6.&len 127
 set units:12:6.&write @unit
 set units:12:6.&rt 36
 op mul &t2 units:12:6.&len 2
-op add @counter 78 &t2
+op add @counter 82 &t2
 op add units:12:6.&len units:12:6.&len 1
 ucontrol flag PID:8:4
 op add i:28:9 i:28:9 1
@@ -44,36 +44,40 @@ print "/"
 print 128
 printflush messageStatus:4:4
 sensor &t1 switchOnOff:6:4 @enabled
-jump 66 equal &t1 0
+jump 67 equal &t1 0
 set i:48:13 0
-jump 65 greaterThanEq i:48:13 units:12:6.&len
+jump 66 greaterThanEq i:48:13 units:12:6.&len
 print "Controlling unit "
 print i:48:13
 print "\n"
-set unit:67:20 null
+set &t2 null
 jump 59 lessThan i:48:13 0
 jump 59 greaterThan i:48:13 127
 set units:12:6.&rt 58
-op mul &t2 i:48:13 2
-op add @counter 334 &t2
-set unit:67:20 units:12:6.&read
+op mul &t3 i:48:13 2
+op add @counter 338 &t3
+set &t2 units:12:6.&read
+ubind &t2
 print "todo : action "
-print unit:67:20
+print @unit
 print i:48:13
 printflush messageDebug:5:4
 op add i:48:13 i:48:13 1
 jump 48 always
 jump 45 always
-set i:59:9 0
-jump 76 greaterThanEq i:59:9 units:12:6.&len
-jump 73 lessThan i:59:9 0
-jump 73 greaterThan i:59:9 127
-set units:12:6.&rt 73
-op mul &t2 i:59:9 2
-op add @counter 334 &t2
+set i:60:9 0
+jump 80 greaterThanEq i:60:9 units:12:6.&len
+set &t2 null
+jump 76 lessThan i:60:9 0
+jump 76 greaterThan i:60:9 127
+set units:12:6.&rt 75
+op mul &t3 i:60:9 2
+op add @counter 338 &t3
+set &t2 units:12:6.&read
+ubind &t2
 ucontrol flag 0
-op add i:59:9 i:59:9 1
-jump 67 always
+op add i:60:9 i:60:9 1
+jump 68 always
 end
 end
 set units:12:6->0 units:12:6.&write

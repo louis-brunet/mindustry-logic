@@ -48,7 +48,8 @@ while (switchOnOff.enabled) {
     for (let i = 0; i < units.length; i++) {
         print`Controlling unit ${i}\n`;
         
-        tryAction(units[i], i);
+        unitBind(units[i]);
+        tryAction(i);
 
         printFlush(messageDebug);
     }
@@ -57,14 +58,15 @@ while (switchOnOff.enabled) {
 /** Restore bound units */
 
 for (let i = 0; i < units.length; i++) {
-    units[i];
+    unitBind(units[i]);
     unitControl.flag(0);
 }
 
 endScript();
 
 
-function tryAction (unit: AnyUnit, index: number) {
+function tryAction (index: number) {
+    const { unit } = Vars;
     print('todo : action ', unit, index);
 }
 
