@@ -48,8 +48,10 @@ sensor &t2:unitAct:48:0 @unit @range
 op sub &t3:unitAct:48:0 &t2:unitAct:48:0 1
 ucontrol approach &t0:unitAct:48:0 &t1:unitAct:48:0 &t3:unitAct:48:0
 ucontrol targetp target:49:10 1
-jump 54 always
-print "no target found"
+jump 56 always
+print "no target found ("
+print target:49:10
+print ")"
 printflush message2
 ucontrol approach idleX:7:4 idleY:8:4 10
 set &funitAct:48:0 null

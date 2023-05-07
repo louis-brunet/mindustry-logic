@@ -59,7 +59,7 @@ function unitAct () {
         unitControl.targetp({unit: target, shoot: true});
     } else {
         // no enemies
-        print`no target found`;
+        print`no target found (${target})`;
         printFlush(msgDebug);
         unitControl.approach({x: idleX, y: idleY, radius: 10});
         
