@@ -21,12 +21,13 @@ print " no unit found"
 printflush message1
 end
 set count:34:4 0
-jump 32 equal @unit 0
+jump 33 equal @unit 0
 sensor &t1 @unit @flag
-jump 30 strictEqual &t1 0
+op strictEqual &t2 &t1 0
+jump 31 equal &t2 0
 ucontrol flag PID:6:4
-set &runitAct:48:0 29
-jump 38 always
+set &runitAct:48:0 30
+jump 39 always
 op add count:34:4 count:34:4 1
 ubind UTYPE:16:4
 jump 23 notEqual @unit startUnit:27:4
@@ -37,7 +38,7 @@ print UTYPE:16:4
 printflush message1
 end
 uradar enemy any any distance 0 1 target:49:10
-jump 50 equal target:49:10 0
+jump 51 equal target:49:10 0
 print "found target: "
 print target:49:10
 printflush message2
@@ -47,7 +48,7 @@ sensor &t2:unitAct:48:0 @unit @range
 op sub &t3:unitAct:48:0 &t2:unitAct:48:0 1
 ucontrol approach &t0:unitAct:48:0 &t1:unitAct:48:0 &t3:unitAct:48:0
 ucontrol targetp target:49:10 1
-jump 53 always
+jump 54 always
 print "no target found"
 printflush message2
 ucontrol approach idleX:7:4 idleY:8:4 10

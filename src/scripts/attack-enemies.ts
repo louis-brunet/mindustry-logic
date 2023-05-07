@@ -34,7 +34,7 @@ if (!startUnit) {
 let count = 0;
 do {
     if (!Vars.unit) break;
-    if (Vars.unit.flag !== 0) {
+    if (Vars.unit.flag === 0) {
         unitControl.flag(PID);
         unitAct();
         count++;
