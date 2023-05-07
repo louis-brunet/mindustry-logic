@@ -48,6 +48,7 @@ print`PID=${PID}\n${count} units acted\n${UTYPE}`;
 printFlush(msgStd);
 
 function unitAct () {
+    unitControl.boost(true);
     const target = unitRadar({ 
         filters: ["enemy", "any", "any"], 
         order: true, 
@@ -70,6 +71,10 @@ function unitAct () {
         print`${Vars.unit}@(${Math.floor(Vars.unit.x)}, ${Math.floor(Vars.unit.y)})\n`;
         print`no target found (${target})`;
         printFlush(msgDebug);
+
+        if (Vars.unit.shooting) {
+            unitControl.stop();
+        }
         unitControl.approach({x: idleX, y: idleY, radius: Vars.unit.range});
         
         // mine ? 
