@@ -57,13 +57,16 @@ function unitAct () {
         // found target enemy
         print`found target: ${target}`;
         printFlush(msgDebug);
-        unitControl.approach({ x: target.x, y: target.y, radius: Vars.unit.range - 1 });
+        const location = { x: target.x, y: target.y, radius: Vars.unit.range - 1 };
+        if (!unitControl.within(location)) {
+            unitControl.approach(location);
+        }
         unitControl.targetp({unit: target, shoot: true});
     } else {
         // no enemies
         print`no target found (${target})`;
         printFlush(msgDebug);
-        unitControl.approach({x: idleX, y: idleY, radius: 10});
+        unitControl.approach({x: idleX, y: idleY, radius: Vars.unit.range});
         
         // mine ? 
     }

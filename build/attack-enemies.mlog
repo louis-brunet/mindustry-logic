@@ -43,7 +43,7 @@ print UTYPE:16:4
 printflush message1
 end
 uradar enemy any any distance 0 1 target:51:10
-jump 56 equal target:51:10 0
+jump 58 equal target:51:10 0
 print "found target: "
 print target:51:10
 printflush message2
@@ -51,13 +51,16 @@ sensor &t0:unitAct:50:0 target:51:10 @x
 sensor &t1:unitAct:50:0 target:51:10 @y
 sensor &t2:unitAct:50:0 @unit @range
 op sub &t3:unitAct:50:0 &t2:unitAct:50:0 1
+ucontrol within &t0:unitAct:50:0 &t1:unitAct:50:0 &t3:unitAct:50:0 &t4:unitAct:50:0 0
+jump 56 notEqual &t4:unitAct:50:0 0
 ucontrol approach &t0:unitAct:50:0 &t1:unitAct:50:0 &t3:unitAct:50:0
 ucontrol targetp target:51:10 1
-jump 61 always
+jump 64 always
 print "no target found ("
 print target:51:10
 print ")"
 printflush message2
-ucontrol approach idleX:7:4 idleY:8:4 10
+sensor &t0:unitAct:50:0 @unit @range
+ucontrol approach idleX:7:4 idleY:8:4 &t0:unitAct:50:0
 set &funitAct:50:0 null
 set @counter &runitAct:50:0
