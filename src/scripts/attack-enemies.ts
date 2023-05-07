@@ -1,7 +1,9 @@
 const _UTYPE_DEFAULT: UnitSymbol = Units.alpha;
 const _IDLE_X_DEFAULT = Vars.thisx;
 const _IDLE_Y_DEFAULT = Vars.thisy;
+const _PID_DEFAULT = 2;
 
+let PID = _PID_DEFAULT;
 let UTYPE: UnitSymbol = _UTYPE_DEFAULT;
 let idleX = _IDLE_X_DEFAULT;
 let idleY = _IDLE_Y_DEFAULT;
@@ -14,10 +16,16 @@ if (!switchOnOff.enabled) {
 unitBind(UTYPE);
 
 const startUnit = Vars.unit;
+if (!startUnit) {
+    endScript();
+}
 
 do {
     if (!Vars.unit) break;
-    unitAct();
+    if (Vars.unit.flag !== 0) {
+        unitControl.flag(PID);
+        unitAct();
+    }
     unitBind(UTYPE);
 } while (Vars.unit != startUnit);
 
