@@ -1,32 +1,35 @@
 set PID:6:4 2
-set UTYPE:7:4 @alpha
-set idleX:8:4 @thisx
-set idleY:9:4 @thisy
+ubind @alpha
+jump 4 notEqual @unit 0
+end
+sensor UTYPE:11:4 @unit @type
+set idleX:12:4 @thisx
+set idleY:13:4 @thisy
 sensor &t0 switch1 @enabled
-jump 7 notEqual &t0 0
+jump 10 notEqual &t0 0
 end
-ubind UTYPE:7:4
-set startUnit:18:4 @unit
-jump 11 notEqual startUnit:18:4 0
+ubind UTYPE:11:4
+set startUnit:22:4 @unit
+jump 14 notEqual startUnit:22:4 0
 end
-jump 19 equal @unit 0
+jump 22 equal @unit 0
 sensor &t1 @unit @flag
-jump 17 strictEqual &t1 0
+jump 20 strictEqual &t1 0
 ucontrol flag PID:6:4
-set &runitAct:32:0 17
-jump 20 always
-ubind UTYPE:7:4
-jump 11 notEqual @unit startUnit:18:4
+set &runitAct:36:0 20
+jump 23 always
+ubind UTYPE:11:4
+jump 14 notEqual @unit startUnit:22:4
 end
-uradar enemy any any distance 0 1 target:33:10
-jump 29 equal target:33:10 0
-sensor &t0:unitAct:32:0 target:33:10 @x
-sensor &t1:unitAct:32:0 target:33:10 @y
-sensor &t2:unitAct:32:0 @unit @range
-op sub &t3:unitAct:32:0 &t2:unitAct:32:0 1
-ucontrol approach &t0:unitAct:32:0 &t1:unitAct:32:0 &t3:unitAct:32:0
-ucontrol targetp target:33:10 1
-jump 30 always
-ucontrol approach idleX:8:4 idleY:9:4 10
-set &funitAct:32:0 null
-set @counter &runitAct:32:0
+uradar enemy any any distance 0 1 target:37:10
+jump 32 equal target:37:10 0
+sensor &t0:unitAct:36:0 target:37:10 @x
+sensor &t1:unitAct:36:0 target:37:10 @y
+sensor &t2:unitAct:36:0 @unit @range
+op sub &t3:unitAct:36:0 &t2:unitAct:36:0 1
+ucontrol approach &t0:unitAct:36:0 &t1:unitAct:36:0 &t3:unitAct:36:0
+ucontrol targetp target:37:10 1
+jump 33 always
+ucontrol approach idleX:12:4 idleY:13:4 10
+set &funitAct:36:0 null
+set @counter &runitAct:36:0

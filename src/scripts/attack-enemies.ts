@@ -4,7 +4,11 @@ const _IDLE_Y_DEFAULT = Vars.thisy;
 const _PID_DEFAULT = 2;
 
 let PID = _PID_DEFAULT;
-let UTYPE: UnitSymbol = _UTYPE_DEFAULT;
+
+unitBind(_UTYPE_DEFAULT);
+if (!Vars.unit) endScript();
+
+let UTYPE: UnitSymbol = Vars.unit.type;// _UTYPE_DEFAULT;
 let idleX = _IDLE_X_DEFAULT;
 let idleY = _IDLE_Y_DEFAULT;
 
