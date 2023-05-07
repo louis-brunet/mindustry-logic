@@ -17,6 +17,8 @@ let UTYPE: UnitSymbol = Vars.unit.type;// _UTYPE_DEFAULT;
 
 const switchOnOff = getBuilding('switch1');
 if (!switchOnOff.enabled) {
+    print`PID=${PID} no switch enabled`;
+    printFlush(msgStd);
     endScript();
 }
 
@@ -24,6 +26,8 @@ unitBind(UTYPE);
 
 let startUnit = Vars.unit;
 if (!startUnit) {
+    print`PID=${PID} no unit found`;
+    printFlush(msgStd);
     endScript();
 }
 

@@ -6,42 +6,50 @@ jump 6 notEqual @unit 0
 end
 sensor UTYPE:16:4 @unit @type
 sensor &t0 switch1 @enabled
-jump 10 notEqual &t0 0
+jump 14 notEqual &t0 0
+print "PID="
+print PID:6:4
+print " no switch enabled"
+printflush message1
 end
 ubind UTYPE:16:4
-set startUnit:25:4 @unit
-jump 14 notEqual startUnit:25:4 0
+set startUnit:27:4 @unit
+jump 22 notEqual startUnit:27:4 0
+print "PID="
+print PID:6:4
+print " no unit found"
+printflush message1
 end
-set count:30:4 0
-jump 24 equal @unit 0
+set count:34:4 0
+jump 32 equal @unit 0
 sensor &t1 @unit @flag
-jump 22 strictEqual &t1 0
+jump 30 strictEqual &t1 0
 ucontrol flag PID:6:4
-set &runitAct:44:0 21
-jump 30 always
-op add count:30:4 count:30:4 1
+set &runitAct:48:0 29
+jump 38 always
+op add count:34:4 count:34:4 1
 ubind UTYPE:16:4
-jump 15 notEqual @unit startUnit:25:4
+jump 23 notEqual @unit startUnit:27:4
 print "Unit count: "
-print count:30:4
+print count:34:4
 print "\n"
 print UTYPE:16:4
 printflush message1
 end
-uradar enemy any any distance 0 1 target:45:10
-jump 42 equal target:45:10 0
+uradar enemy any any distance 0 1 target:49:10
+jump 50 equal target:49:10 0
 print "found target: "
-print target:45:10
+print target:49:10
 printflush message2
-sensor &t0:unitAct:44:0 target:45:10 @x
-sensor &t1:unitAct:44:0 target:45:10 @y
-sensor &t2:unitAct:44:0 @unit @range
-op sub &t3:unitAct:44:0 &t2:unitAct:44:0 1
-ucontrol approach &t0:unitAct:44:0 &t1:unitAct:44:0 &t3:unitAct:44:0
-ucontrol targetp target:45:10 1
-jump 45 always
+sensor &t0:unitAct:48:0 target:49:10 @x
+sensor &t1:unitAct:48:0 target:49:10 @y
+sensor &t2:unitAct:48:0 @unit @range
+op sub &t3:unitAct:48:0 &t2:unitAct:48:0 1
+ucontrol approach &t0:unitAct:48:0 &t1:unitAct:48:0 &t3:unitAct:48:0
+ucontrol targetp target:49:10 1
+jump 53 always
 print "no target found"
 printflush message2
 ucontrol approach idleX:7:4 idleY:8:4 10
-set &funitAct:44:0 null
-set @counter &runitAct:44:0
+set &funitAct:48:0 null
+set @counter &runitAct:48:0
