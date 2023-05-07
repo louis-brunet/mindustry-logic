@@ -49,11 +49,13 @@ printFlush(msgStd);
 
 function unitAct () {
     unitControl.boost(true);
-    const target = unitRadar({ 
-        filters: ["enemy", "any", "any"], 
-        order: true, 
-        sort: "distance" 
-    });
+    
+    const target = radar({building: Vars.this, filters: ["enemy", "any", "any"], order: true, sort: "distance"});
+    // const target = unitRadar({ 
+    //     filters: ["enemy", "any", "any"], 
+    //     order: true, 
+    //     sort: "distance" 
+    // });
     if (target) {
         // found target enemy
         print`PID=${PID}\n`;
