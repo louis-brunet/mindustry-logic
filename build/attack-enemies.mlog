@@ -43,8 +43,8 @@ print UTYPE:16:4
 printflush message1
 end
 ucontrol boost 1
-radar enemy any any distance @this 1 target:53:10
-jump 72 equal target:53:10 0
+uradar enemy any any distance 0 1 target:54:10
+jump 72 equal target:54:10 0
 print "PID="
 print PID:6:4
 print "\n"
@@ -59,16 +59,16 @@ print ", "
 print &t3:unitAct:50:0
 print ")\n"
 print "found target: "
-print target:53:10
+print target:54:10
 printflush message2
-sensor &t4:unitAct:50:0 target:53:10 @x
-sensor &t5:unitAct:50:0 target:53:10 @y
+sensor &t4:unitAct:50:0 target:54:10 @x
+sensor &t5:unitAct:50:0 target:54:10 @y
 sensor &t6:unitAct:50:0 @unit @range
 op sub &t7:unitAct:50:0 &t6:unitAct:50:0 1
 ucontrol within &t4:unitAct:50:0 &t5:unitAct:50:0 &t7:unitAct:50:0 &t8:unitAct:50:0 0
 jump 70 notEqual &t8:unitAct:50:0 0
 ucontrol approach &t4:unitAct:50:0 &t5:unitAct:50:0 &t7:unitAct:50:0
-ucontrol targetp target:53:10 1
+ucontrol targetp target:54:10 1
 jump 94 always
 print "PID="
 print PID:6:4
@@ -84,7 +84,7 @@ print ", "
 print &t3:unitAct:50:0
 print ")\n"
 print "no target found ("
-print target:53:10
+print target:54:10
 print ")"
 printflush message2
 sensor &t4:unitAct:50:0 @unit @shooting
