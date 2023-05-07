@@ -47,10 +47,16 @@ do {
 print`PID=${PID}\n${count} units acted\n${UTYPE}`;
 printFlush(msgStd);
 
+function goToLocation ({x, y, radius}) {
+    const location = {x, y, radius};
+    if (!unitControl.within(location)) {
+        unitControl.approach(location);
+    }
+}
+
 function unitAct () {
     unitControl.boost(true);
     
-    // const target = radar({building: Vars.this, filters: ["enemy", "any", "any"], order: true, sort: "distance"});
     const target = unitRadar({ 
         filters: ["enemy", "any", "any"], 
         order: true, 
@@ -61,12 +67,19 @@ function unitAct () {
         print`PID=${PID}\n`;
         print`${Vars.unit}@(${Math.floor(Vars.unit.x)}, ${Math.floor(Vars.unit.y)})\n`;
         print`found target: ${target}`;
-        printFlush(msgDebug);
-        const location = { x: target.x, y: target.y, radius: Vars.unit.range - 1 };
-        if (!unitControl.within(location)) {
-            unitControl.approach(location);
+
+        if (target.health <= 0) {
+            print('\ntarget is dead');
+
+            unitControl.stop();
+        } else {
+            print('\ntarget is alive');
+            
+            goToLocation({ x: target.x, y: target.y, radius: Vars.unit.range - 1 });
+            unitControl.targetp({unit: target, shoot: true});
         }
-        unitControl.targetp({unit: target, shoot: true});
+
+        printFlush(msgDebug);
     } else {
         // no enemies
         print`PID=${PID}\n`;
@@ -74,10 +87,8 @@ function unitAct () {
         print`no target found (${target})`;
         printFlush(msgDebug);
 
-        if (Vars.unit.shooting) {
-            unitControl.stop();
-        }
-        unitControl.approach({x: idleX, y: idleY, radius: Vars.unit.range});
+        unitControl.stop();
+        goToLocation({x: idleX, y: idleY, radius: Vars.unit.range});
         
         // mine ? 
     }
