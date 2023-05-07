@@ -43,46 +43,50 @@ print UTYPE:16:4
 printflush message1
 end
 uradar enemy any any distance 0 1 target:51:10
-jump 69 equal target:51:10 0
+jump 71 equal target:51:10 0
 print "PID="
 print PID:6:4
 print "\n"
 sensor &t0:unitAct:50:0 @unit @x
-sensor &t1:unitAct:50:0 @unit @y
+op floor &t1:unitAct:50:0 &t0:unitAct:50:0
+sensor &t2:unitAct:50:0 @unit @y
+op floor &t3:unitAct:50:0 &t2:unitAct:50:0
 print @unit
 print "@("
-print &t0:unitAct:50:0
-print ", "
 print &t1:unitAct:50:0
+print ", "
+print &t3:unitAct:50:0
 print ")\n"
 print "found target: "
 print target:51:10
 printflush message2
-sensor &t2:unitAct:50:0 target:51:10 @x
-sensor &t3:unitAct:50:0 target:51:10 @y
-sensor &t4:unitAct:50:0 @unit @range
-op sub &t5:unitAct:50:0 &t4:unitAct:50:0 1
-ucontrol within &t2:unitAct:50:0 &t3:unitAct:50:0 &t5:unitAct:50:0 &t6:unitAct:50:0 0
-jump 67 notEqual &t6:unitAct:50:0 0
-ucontrol approach &t2:unitAct:50:0 &t3:unitAct:50:0 &t5:unitAct:50:0
+sensor &t4:unitAct:50:0 target:51:10 @x
+sensor &t5:unitAct:50:0 target:51:10 @y
+sensor &t6:unitAct:50:0 @unit @range
+op sub &t7:unitAct:50:0 &t6:unitAct:50:0 1
+ucontrol within &t4:unitAct:50:0 &t5:unitAct:50:0 &t7:unitAct:50:0 &t8:unitAct:50:0 0
+jump 69 notEqual &t8:unitAct:50:0 0
+ucontrol approach &t4:unitAct:50:0 &t5:unitAct:50:0 &t7:unitAct:50:0
 ucontrol targetp target:51:10 1
-jump 86 always
+jump 90 always
 print "PID="
 print PID:6:4
 print "\n"
 sensor &t0:unitAct:50:0 @unit @x
-sensor &t1:unitAct:50:0 @unit @y
+op floor &t1:unitAct:50:0 &t0:unitAct:50:0
+sensor &t2:unitAct:50:0 @unit @y
+op floor &t3:unitAct:50:0 &t2:unitAct:50:0
 print @unit
 print "@("
-print &t0:unitAct:50:0
-print ", "
 print &t1:unitAct:50:0
+print ", "
+print &t3:unitAct:50:0
 print ")\n"
 print "no target found ("
 print target:51:10
 print ")"
 printflush message2
-sensor &t2:unitAct:50:0 @unit @range
-ucontrol approach idleX:7:4 idleY:8:4 &t2:unitAct:50:0
+sensor &t4:unitAct:50:0 @unit @range
+ucontrol approach idleX:7:4 idleY:8:4 &t4:unitAct:50:0
 set &funitAct:50:0 null
 set @counter &runitAct:50:0
