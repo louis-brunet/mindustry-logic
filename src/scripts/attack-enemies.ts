@@ -47,10 +47,10 @@ do {
 print`PID=${PID}\n${count} units acted\n${UTYPE}`;
 printFlush(msgStd);
 
-function goToLocation ({x, y, radius}) {
-    const location = {x, y, radius};
-    if (!unitControl.within(location)) {
-        unitControl.approach(location);
+function goToLocation (l: {x: number, y: number, radius: number}) {
+    // const location = {x, y, radius}; // making compiler happy
+    if (!unitControl.within(l)) {
+        unitControl.approach(l);
     }
 }
 
