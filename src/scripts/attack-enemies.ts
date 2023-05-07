@@ -15,7 +15,7 @@ if (!switchOnOff.enabled) {
 
 unitBind(UTYPE);
 
-const startUnit = Vars.unit;
+let startUnit = Vars.unit;
 if (!startUnit) {
     endScript();
 }

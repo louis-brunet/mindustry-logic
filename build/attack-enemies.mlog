@@ -6,25 +6,27 @@ sensor &t0 switch1 @enabled
 jump 7 notEqual &t0 0
 end
 ubind UTYPE:7:4
-jump 10 notEqual @unit 0
+set startUnit:18:4 @unit
+jump 11 notEqual startUnit:18:4 0
 end
-jump null equal @unit 0
+jump 19 equal @unit 0
 sensor &t1 @unit @flag
-jump 16 strictEqual &t1 0
+jump 17 strictEqual &t1 0
 ucontrol flag PID:6:4
-set &runitAct:32:0 16
-jump 18 always
+set &runitAct:32:0 17
+jump 20 always
 ubind UTYPE:7:4
+jump 11 notEqual @unit startUnit:18:4
 end
 uradar enemy any any distance 0 1 target:33:10
-jump 27 equal target:33:10 0
+jump 29 equal target:33:10 0
 sensor &t0:unitAct:32:0 target:33:10 @x
 sensor &t1:unitAct:32:0 target:33:10 @y
 sensor &t2:unitAct:32:0 @unit @range
 op sub &t3:unitAct:32:0 &t2:unitAct:32:0 1
 ucontrol approach &t0:unitAct:32:0 &t1:unitAct:32:0 &t3:unitAct:32:0
 ucontrol targetp target:33:10 1
-jump 28 always
+jump 30 always
 ucontrol approach idleX:8:4 idleY:9:4 10
 set &funitAct:32:0 null
 set @counter &runitAct:32:0
