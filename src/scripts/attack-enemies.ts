@@ -24,14 +24,19 @@ if (!startUnit) {
     endScript();
 }
 
+let count = 0;
 do {
     if (!Vars.unit) break;
     if (Vars.unit.flag !== 0) {
         unitControl.flag(PID);
         unitAct();
+        count++;
     }
     unitBind(UTYPE);
 } while (Vars.unit != startUnit);
+
+print`Unit count: ${count}\n${UTYPE}`;
+printFlush()
 
 function unitAct () {
     const target = unitRadar({ 

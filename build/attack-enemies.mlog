@@ -12,24 +12,31 @@ ubind UTYPE:11:4
 set startUnit:22:4 @unit
 jump 14 notEqual startUnit:22:4 0
 end
-jump 22 equal @unit 0
+set count:27:4 0
+jump 24 equal @unit 0
 sensor &t1 @unit @flag
-jump 20 strictEqual &t1 0
+jump 22 strictEqual &t1 0
 ucontrol flag PID:6:4
-set &runitAct:36:0 20
-jump 23 always
+set &runitAct:41:0 21
+jump 30 always
+op add count:27:4 count:27:4 1
 ubind UTYPE:11:4
-jump 14 notEqual @unit startUnit:22:4
+jump 15 notEqual @unit startUnit:22:4
+print "Unit count: "
+print count:27:4
+print "\n"
+print UTYPE:11:4
+printflush message1
 end
-uradar enemy any any distance 0 1 target:37:10
-jump 32 equal target:37:10 0
-sensor &t0:unitAct:36:0 target:37:10 @x
-sensor &t1:unitAct:36:0 target:37:10 @y
-sensor &t2:unitAct:36:0 @unit @range
-op sub &t3:unitAct:36:0 &t2:unitAct:36:0 1
-ucontrol approach &t0:unitAct:36:0 &t1:unitAct:36:0 &t3:unitAct:36:0
-ucontrol targetp target:37:10 1
-jump 33 always
+uradar enemy any any distance 0 1 target:42:10
+jump 39 equal target:42:10 0
+sensor &t0:unitAct:41:0 target:42:10 @x
+sensor &t1:unitAct:41:0 target:42:10 @y
+sensor &t2:unitAct:41:0 @unit @range
+op sub &t3:unitAct:41:0 &t2:unitAct:41:0 1
+ucontrol approach &t0:unitAct:41:0 &t1:unitAct:41:0 &t3:unitAct:41:0
+ucontrol targetp target:42:10 1
+jump 40 always
 ucontrol approach idleX:12:4 idleY:13:4 10
-set &funitAct:36:0 null
-set @counter &runitAct:36:0
+set &funitAct:41:0 null
+set @counter &runitAct:41:0
