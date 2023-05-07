@@ -36,13 +36,15 @@ do {
     if (!Vars.unit) break;
     if (Vars.unit.flag === 0) {
         unitControl.flag(PID);
+    }
+    if (Vars.unit.flag === PID) {
         unitAct();
         count++;
     }
     unitBind(UTYPE);
 } while (Vars.unit != startUnit);
 
-print`Unit count: ${count}\n${UTYPE}`;
+print`PID=${PID}\n${count} units acted\n${UTYPE}`;
 printFlush(msgStd);
 
 function unitAct () {
