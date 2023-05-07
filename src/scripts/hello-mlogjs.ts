@@ -1,4 +1,4 @@
-const _MAX_CAPACITY = 128;
+const _MAX_CAPACITY = 64;
 const _DEFAULT_UCOUNT = 5;
 
 let messageStatus = getBuilding('message1');
@@ -29,6 +29,9 @@ print`initializing proc. PID = ${PID}, UTYPE=${UTYPE}\n`;
 for (let i = 0; i < UCOUNT; i++) {
     unitBind(UTYPE);
     if (Vars.unit !== undefined) {
+        if (i > 0 && Vars.unit === units[0]) {
+            break;
+        }
         if (Vars.unit.flag !== 0) {
             i--;
             continue;
