@@ -38,7 +38,7 @@ jump 42 greaterThan units:13:6.&len 63
 set units:13:6.&write @unit
 set units:13:6.&rt 41
 op mul &t5 units:13:6.&len 2
-op add @counter 87 &t5
+op add @counter 101 &t5
 op add units:13:6.&len units:13:6.&len 1
 ucontrol flag PID:8:4
 op add i:29:9 i:29:9 1
@@ -48,41 +48,55 @@ print units:13:6.&len
 print "/"
 print 64
 printflush messageStatus:4:4
+set restart:50:4 0
 sensor &t1 switchOnOff:6:4 @enabled
-jump 72 equal &t1 0
+op equal &t2 restart:50:4 0
+op land &t3 &t1 &t2
+jump 86 equal &t3 0
 set i:52:13 0
-jump 71 greaterThanEq i:52:13 units:13:6.&len
+jump 85 greaterThanEq i:52:13 units:13:6.&len
 print "Controlling unit "
 print i:52:13
 print "\n"
-set &t2 null
-jump 64 lessThan i:52:13 0
-jump 64 greaterThan i:52:13 63
-set units:13:6.&rt 63
-op mul &t3 i:52:13 2
-op add @counter 215 &t3
-set &t2 units:13:6.&read
-ubind &t2
-set index:72:20 i:52:13
-set &rtryAction:72:0 68
-jump 343 always
+set u:54:14 null
+jump 67 lessThan i:52:13 0
+jump 67 greaterThan i:52:13 63
+set units:13:6.&rt 66
+op mul &t4 i:52:13 2
+op add @counter 229 &t4
+set u:54:14 units:13:6.&read
+sensor &t5 u:54:14 @health
+jump 71 greaterThan &t5 0
+set restart:50:4 1
+jump 85 always
+set &t6 null
+jump 78 lessThan i:52:13 0
+jump 78 greaterThan i:52:13 63
+set units:13:6.&rt 77
+op mul &t7 i:52:13 2
+op add @counter 229 &t7
+set &t6 units:13:6.&read
+ubind &t6
+set index:77:20 i:52:13
+set &rtryAction:77:0 82
+jump 357 always
 printflush messageDebug:5:4
 op add i:52:13 i:52:13 1
-jump 53 always
-jump 50 always
-set i:64:9 0
-jump 85 greaterThanEq i:64:9 units:13:6.&len
-set &t2 null
-jump 81 lessThan i:64:9 0
-jump 81 greaterThan i:64:9 63
-set units:13:6.&rt 80
-op mul &t3 i:64:9 2
-op add @counter 215 &t3
-set &t2 units:13:6.&read
-ubind &t2
+jump 56 always
+jump 51 always
+set i:69:9 0
+jump 99 greaterThanEq i:69:9 units:13:6.&len
+set &t4 null
+jump 95 lessThan i:69:9 0
+jump 95 greaterThan i:69:9 63
+set units:13:6.&rt 94
+op mul &t5 i:69:9 2
+op add @counter 229 &t5
+set &t4 units:13:6.&read
+ubind &t4
 ucontrol flag 0
-op add i:64:9 i:64:9 1
-jump 73 always
+op add i:69:9 i:69:9 1
+jump 87 always
 end
 end
 set units:13:6->0 units:13:6.&write
@@ -343,18 +357,18 @@ set units:13:6.&read units:13:6->63
 set @counter units:13:6.&rt
 print "todo : action "
 print @unit
-print index:72:20
-sensor &t0:tryAction:72:0 @unit @totalItems
-sensor &t1:tryAction:72:0 @unit @itemCapacity
-jump 354 lessThan &t0:tryAction:72:0 &t1:tryAction:72:0
-ulocate building core 0 @copper coreX:78:22 coreY:78:29 found:78:15 coreBuilding:78:36
-jump 353 equal found:78:15 0
-ucontrol approach coreX:78:22 coreY:78:29 5
-ucontrol itemDrop coreBuilding:78:36 99999999
-jump 358 always
-ulocate ore core true ITYPE:11:4 oreX:85:22 oreY:85:28 found:85:15 &_
-jump 358 equal found:85:15 0
-ucontrol approach oreX:85:22 oreY:85:28 5
-ucontrol mine oreX:85:22 oreY:85:28
-set &ftryAction:72:0 null
-set @counter &rtryAction:72:0
+print index:77:20
+sensor &t0:tryAction:77:0 @unit @totalItems
+sensor &t1:tryAction:77:0 @unit @itemCapacity
+jump 368 lessThan &t0:tryAction:77:0 &t1:tryAction:77:0
+ulocate building core 0 @copper coreX:83:22 coreY:83:29 found:83:15 coreBuilding:83:36
+jump 367 equal found:83:15 0
+ucontrol approach coreX:83:22 coreY:83:29 5
+ucontrol itemDrop coreBuilding:83:36 99999999
+jump 372 always
+ulocate ore core true ITYPE:11:4 oreX:90:22 oreY:90:28 found:90:15 &_
+jump 372 equal found:90:15 0
+ucontrol approach oreX:90:22 oreY:90:28 5
+ucontrol mine oreX:90:22 oreY:90:28
+set &ftryAction:77:0 null
+set @counter &rtryAction:77:0

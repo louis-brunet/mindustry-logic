@@ -4,13 +4,16 @@ const _IDLE_Y_DEFAULT = Vars.thisy;
 const _PID_DEFAULT = 2;
 
 let PID = _PID_DEFAULT;
+let idleX = _IDLE_X_DEFAULT;
+let idleY = _IDLE_Y_DEFAULT;
+
+const msgStd = getBuilding('message1');
+const msgDebug = getBuilding('message2');
 
 unitBind(_UTYPE_DEFAULT);
 if (!Vars.unit) endScript();
 
 let UTYPE: UnitSymbol = Vars.unit.type;// _UTYPE_DEFAULT;
-let idleX = _IDLE_X_DEFAULT;
-let idleY = _IDLE_Y_DEFAULT;
 
 const switchOnOff = getBuilding('switch1');
 if (!switchOnOff.enabled) {
@@ -36,7 +39,7 @@ do {
 } while (Vars.unit != startUnit);
 
 print`Unit count: ${count}\n${UTYPE}`;
-printFlush()
+printFlush(msgStd);
 
 function unitAct () {
     const target = unitRadar({ 
@@ -46,10 +49,14 @@ function unitAct () {
     });
     if (target) {
         // found target enemy
+        print`found target: ${target}`;
+        printFlush(msgDebug);
         unitControl.approach({ x: target.x, y: target.y, radius: Vars.unit.range - 1 });
         unitControl.targetp({unit: target, shoot: true});
     } else {
         // no enemies
+        print`no target found`;
+        printFlush(msgDebug);
         unitControl.approach({x: idleX, y: idleY, radius: 10});
         
         // mine ? 

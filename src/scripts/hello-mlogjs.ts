@@ -47,11 +47,16 @@ print`Bound units : ${units.length}/${units.size}`;
 printFlush(messageStatus);
 
 /** Units are initialized */
-
-while (switchOnOff.enabled) {
+let restart = false;
+while (switchOnOff.enabled && !restart) {
     for (let i = 0; i < units.length; i++) {
         print`Controlling unit ${i}\n`;
-        
+        const u = units [i];
+        if (u.health <= 0) {
+            restart = true;
+            break;
+        }
+
         unitBind(units[i]);
         tryAction(i);
 
