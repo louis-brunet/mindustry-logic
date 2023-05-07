@@ -1,4 +1,4 @@
-const _UTYPE_DEFAULT: UnitSymbol = Units.alpha;
+const _UTYPE_DEFAULT: UnitSymbol = getVar<UnitSymbol>('@new-horizon-pester');
 const _IDLE_X_DEFAULT = Vars.thisx;
 const _IDLE_Y_DEFAULT = Vars.thisy;
 const _PID_DEFAULT = 2;
@@ -50,12 +50,12 @@ printFlush(msgStd);
 function unitAct () {
     unitControl.boost(true);
     
-    // const target = radar({building: Vars.this, filters: ["enemy", "any", "any"], order: true, sort: "distance"});
-    const target = unitRadar({ 
-        filters: ["enemy", "any", "any"], 
-        order: true, 
-        sort: "distance" 
-    });
+    const target = radar({building: Vars.this, filters: ["enemy", "any", "any"], order: true, sort: "distance"});
+    // const target = unitRadar({ 
+    //     filters: ["enemy", "any", "any"], 
+    //     order: true, 
+    //     sort: "distance" 
+    // });
     if (target) {
         // found target enemy
         print`PID=${PID}\n`;

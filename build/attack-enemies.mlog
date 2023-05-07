@@ -1,12 +1,13 @@
+set _UTYPE_DEFAULT:1:6 @new-horizon-pester
 set PID:6:4 2
 set idleX:7:4 @thisx
 set idleY:8:4 @thisy
-ubind @alpha
-jump 6 notEqual @unit 0
+ubind _UTYPE_DEFAULT:1:6
+jump 7 notEqual @unit 0
 end
 sensor UTYPE:16:4 @unit @type
 sensor &t0 switch1 @enabled
-jump 14 notEqual &t0 0
+jump 15 notEqual &t0 0
 print "PID="
 print PID:6:4
 print " no switch enabled"
@@ -14,26 +15,26 @@ printflush message1
 end
 ubind UTYPE:16:4
 set startUnit:27:4 @unit
-jump 22 notEqual startUnit:27:4 0
+jump 23 notEqual startUnit:27:4 0
 print "PID="
 print PID:6:4
 print " no unit found"
 printflush message1
 end
 set count:34:4 0
-jump 36 equal @unit 0
+jump 37 equal @unit 0
 sensor &t1 @unit @flag
 op strictEqual &t2 &t1 0
-jump 28 equal &t2 0
+jump 29 equal &t2 0
 ucontrol flag PID:6:4
 sensor &t3 @unit @flag
 op strictEqual &t4 &t3 PID:6:4
-jump 34 equal &t4 0
-set &runitAct:50:0 33
-jump 44 always
+jump 35 equal &t4 0
+set &runitAct:50:0 34
+jump 45 always
 op add count:34:4 count:34:4 1
 ubind UTYPE:16:4
-jump 23 notEqual @unit startUnit:27:4
+jump 24 notEqual @unit startUnit:27:4
 print "PID="
 print PID:6:4
 print "\n"
@@ -43,8 +44,8 @@ print UTYPE:16:4
 printflush message1
 end
 ucontrol boost 1
-uradar enemy any any distance 0 1 target:54:10
-jump 72 equal target:54:10 0
+radar enemy any any distance @this 1 target:53:10
+jump 73 equal target:53:10 0
 print "PID="
 print PID:6:4
 print "\n"
@@ -59,17 +60,17 @@ print ", "
 print &t3:unitAct:50:0
 print ")\n"
 print "found target: "
-print target:54:10
+print target:53:10
 printflush message2
-sensor &t4:unitAct:50:0 target:54:10 @x
-sensor &t5:unitAct:50:0 target:54:10 @y
+sensor &t4:unitAct:50:0 target:53:10 @x
+sensor &t5:unitAct:50:0 target:53:10 @y
 sensor &t6:unitAct:50:0 @unit @range
 op sub &t7:unitAct:50:0 &t6:unitAct:50:0 1
 ucontrol within &t4:unitAct:50:0 &t5:unitAct:50:0 &t7:unitAct:50:0 &t8:unitAct:50:0 0
-jump 70 notEqual &t8:unitAct:50:0 0
+jump 71 notEqual &t8:unitAct:50:0 0
 ucontrol approach &t4:unitAct:50:0 &t5:unitAct:50:0 &t7:unitAct:50:0
-ucontrol targetp target:54:10 1
-jump 94 always
+ucontrol targetp target:53:10 1
+jump 95 always
 print "PID="
 print PID:6:4
 print "\n"
@@ -84,11 +85,11 @@ print ", "
 print &t3:unitAct:50:0
 print ")\n"
 print "no target found ("
-print target:54:10
+print target:53:10
 print ")"
 printflush message2
 sensor &t4:unitAct:50:0 @unit @shooting
-jump 92 equal &t4:unitAct:50:0 0
+jump 93 equal &t4:unitAct:50:0 0
 ucontrol stop
 sensor &t5:unitAct:50:0 @unit @range
 ucontrol approach idleX:7:4 idleY:8:4 &t5:unitAct:50:0
