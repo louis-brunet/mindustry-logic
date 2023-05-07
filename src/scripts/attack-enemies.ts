@@ -55,6 +55,8 @@ function unitAct () {
     });
     if (target) {
         // found target enemy
+        print`PID=${PID}\n`;
+        print`${Vars.unit}@(${Vars.unit.x}, ${Vars.unit.y})\n`;
         print`found target: ${target}`;
         printFlush(msgDebug);
         const location = { x: target.x, y: target.y, radius: Vars.unit.range - 1 };
@@ -64,6 +66,8 @@ function unitAct () {
         unitControl.targetp({unit: target, shoot: true});
     } else {
         // no enemies
+        print`PID=${PID}\n`;
+        print`${Vars.unit}@(${Vars.unit.x}, ${Vars.unit.y})\n`;
         print`no target found (${target})`;
         printFlush(msgDebug);
         unitControl.approach({x: idleX, y: idleY, radius: Vars.unit.range});
