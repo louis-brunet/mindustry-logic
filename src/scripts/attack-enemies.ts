@@ -44,11 +44,12 @@ do {
         unitAct();
         count++;
     }
+    print`PID=${PID}\n${count} units acted\n${UTYPE}`;
+    printFlush(msgStd);
+
     unitBind(UTYPE);
 } while (Vars.unit != startUnit);
 
-print`PID=${PID}\n${count} units acted\n${UTYPE}`;
-printFlush(msgStd);
 
 function goToLocation ({x, y, radius}: {x: number, y: number, radius: number}) {
     const location = {x, y, radius}; // making compiler happy..

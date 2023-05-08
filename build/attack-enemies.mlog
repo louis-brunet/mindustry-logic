@@ -22,7 +22,7 @@ print " no unit found"
 printflush message1
 end
 set count:37:4 0
-jump 37 equal @unit 0
+jump 44 equal @unit 0
 sensor &t1 @unit @flag
 op strictEqual &t2 &t1 0
 jump 29 equal &t2 0
@@ -30,11 +30,9 @@ ucontrol flag PID:7:4
 sensor &t3 @unit @flag
 op strictEqual &t4 &t3 PID:7:4
 jump 35 equal &t4 0
-set &runitAct:77:0 34
+set &runitAct:78:0 34
 jump 50 always
 op add count:37:4 count:37:4 1
-ubind UTYPE:19:4
-jump 24 notEqual @unit startUnit:30:4
 print "PID="
 print PID:7:4
 print "\n"
@@ -42,90 +40,92 @@ print count:37:4
 print " units acted\n"
 print UTYPE:19:4
 printflush message1
+ubind UTYPE:19:4
+jump 24 notEqual @unit startUnit:30:4
 end
-uradar enemy any any distance 0 1 tmpTarget:61:8
-jump 48 notEqual tmpTarget:61:8 0
-radar enemy any any distance @this 1 tmpTarget:61:8
-set &ffindTarget:60:0 tmpTarget:61:8
-set @counter &rfindTarget:60:0
+uradar enemy any any distance 0 1 tmpTarget:62:8
+jump 48 notEqual tmpTarget:62:8 0
+radar enemy any any distance @this 1 tmpTarget:62:8
+set &ffindTarget:61:0 tmpTarget:62:8
+set @counter &rfindTarget:61:0
 ucontrol boost 1
-set &rfindTarget:60:0 53
+set &rfindTarget:61:0 53
 jump 45 always
-set target:80:10 &ffindTarget:60:0
-jump 87 equal target:80:10 0
+set target:81:10 &ffindTarget:61:0
+jump 87 equal target:81:10 0
 print "PID="
 print PID:7:4
 print "\n"
-sensor &t0:unitAct:77:0 @unit @x
-op floor &t1:unitAct:77:0 &t0:unitAct:77:0
-sensor &t2:unitAct:77:0 @unit @y
-op floor &t3:unitAct:77:0 &t2:unitAct:77:0
+sensor &t0:unitAct:78:0 @unit @x
+op floor &t1:unitAct:78:0 &t0:unitAct:78:0
+sensor &t2:unitAct:78:0 @unit @y
+op floor &t3:unitAct:78:0 &t2:unitAct:78:0
 print @unit
 print "@("
-print &t1:unitAct:77:0
+print &t1:unitAct:78:0
 print ", "
-print &t3:unitAct:77:0
+print &t3:unitAct:78:0
 print ")\n"
 print "found target: [accent]"
-print target:80:10
+print target:81:10
 print "[]"
-sensor &t4:unitAct:77:0 target:80:10 @health
-jump 76 greaterThan &t4:unitAct:77:0 0
+sensor &t4:unitAct:78:0 target:81:10 @health
+jump 76 greaterThan &t4:unitAct:78:0 0
 print "\ntarget is [red]dead[]"
 ucontrol targetp @unit 0
 jump 85 always
 print "\ntarget is [green]alive[]"
-sensor x:53:24 target:80:10 @x
-sensor y:53:27 target:80:10 @y
-sensor &t5:unitAct:77:0 @unit @range
-op sub radius:53:30 &t5:unitAct:77:0 1
-ucontrol within x:53:24 y:53:27 radius:53:30 &t0:goToLocation:53:0 0
-jump 84 notEqual &t0:goToLocation:53:0 0
-ucontrol approach x:53:24 y:53:27 radius:53:30
-ucontrol targetp target:80:10 1
+sensor x:54:24 target:81:10 @x
+sensor y:54:27 target:81:10 @y
+sensor &t5:unitAct:78:0 @unit @range
+op sub radius:54:30 &t5:unitAct:78:0 1
+ucontrol within x:54:24 y:54:27 radius:54:30 &t0:goToLocation:54:0 0
+jump 84 notEqual &t0:goToLocation:54:0 0
+ucontrol approach x:54:24 y:54:27 radius:54:30
+ucontrol targetp target:81:10 1
 printflush message2
 jump 129 always
 print "PID="
 print PID:7:4
 print "\n"
-sensor &t0:unitAct:77:0 @unit @x
-op floor &t1:unitAct:77:0 &t0:unitAct:77:0
-sensor &t2:unitAct:77:0 @unit @y
-op floor &t3:unitAct:77:0 &t2:unitAct:77:0
+sensor &t0:unitAct:78:0 @unit @x
+op floor &t1:unitAct:78:0 &t0:unitAct:78:0
+sensor &t2:unitAct:78:0 @unit @y
+op floor &t3:unitAct:78:0 &t2:unitAct:78:0
 print @unit
 print "@("
-print &t1:unitAct:77:0
+print &t1:unitAct:78:0
 print ", "
-print &t3:unitAct:77:0
+print &t3:unitAct:78:0
 print ")\n"
 jump 120 equal cell1 0
-read status:106:19 cell1 0
-read x:106:27 cell1 1
-read y:106:30 cell1 2
-jump 116 strictEqual status:106:19 0
+read status:107:19 cell1 0
+read x:107:27 cell1 1
+read y:107:30 cell1 2
+jump 116 strictEqual status:107:19 0
 print "using radar target [accent]("
-print x:106:27
+print x:107:27
 print ", "
-print y:106:30
+print y:107:30
 print ")[]"
-sensor radius:53:30 @unit @range
-ucontrol within x:106:27 y:106:30 radius:53:30 &t0:goToLocation:53:0 0
-jump 114 notEqual &t0:goToLocation:53:0 0
-ucontrol approach x:106:27 y:106:30 radius:53:30
-ucontrol target x:106:27 y:106:30 1
+sensor radius:54:30 @unit @range
+ucontrol within x:107:27 y:107:30 radius:54:30 &t0:goToLocation:54:0 0
+jump 114 notEqual &t0:goToLocation:54:0 0
+ucontrol approach x:107:27 y:107:30 radius:54:30
+ucontrol target x:107:27 y:107:30 1
 jump 119 always
 print "no target found ("
-print target:80:10
+print target:81:10
 print ")"
 jump 128 always
 print "no target found ("
-print target:80:10
+print target:81:10
 print ")"
 ucontrol targetp @unit 0
-sensor radius:53:30 @unit @range
-ucontrol within idleX:8:4 idleY:9:4 radius:53:30 &t0:goToLocation:53:0 0
-jump 128 notEqual &t0:goToLocation:53:0 0
-ucontrol approach idleX:8:4 idleY:9:4 radius:53:30
+sensor radius:54:30 @unit @range
+ucontrol within idleX:8:4 idleY:9:4 radius:54:30 &t0:goToLocation:54:0 0
+jump 128 notEqual &t0:goToLocation:54:0 0
+ucontrol approach idleX:8:4 idleY:9:4 radius:54:30
 printflush message2
-set &funitAct:77:0 null
-set @counter &runitAct:77:0
+set &funitAct:78:0 null
+set @counter &runitAct:78:0
