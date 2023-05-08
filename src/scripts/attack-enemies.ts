@@ -54,14 +54,27 @@ function goToLocation ({x, y, radius}: {x: number, y: number, radius: number}) {
     }
 }
 
+function findTarget (): AnyUnit {
+    let tmpTarget = unitRadar({ 
+        filters: ["enemy", "any", "any"], 
+        order: true, 
+        sort: "distance" ,
+    });
+    if (!tmpTarget) {
+        tmpTarget = radar({ 
+            building: Vars.this,
+            filters: ["enemy", "any", "any"], 
+            order: true, 
+            sort: "distance",
+        })
+    }
+    return tmpTarget;
+}
+
 function unitAct () {
     unitControl.boost(true);
     
-    const target = unitRadar({ 
-        filters: ["enemy", "any", "any"], 
-        order: true, 
-        sort: "distance" 
-    });
+    const target = findTarget();
     if (target) {
         // found target enemy
         print`PID=${PID}\n`;
