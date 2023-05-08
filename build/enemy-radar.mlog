@@ -1,0 +1,40 @@
+set &rfindTarget:29:0 2
+jump 27 always
+set target:9:6 &ffindTarget:29:0
+jump 23 equal target:9:6 0
+write 1 cell1 0
+sensor &t0 target:9:6 @x
+write &t0 cell1 1
+sensor &t1 target:9:6 @y
+write &t1 cell1 2
+print "Target\n"
+sensor &t2 target:9:6 @x
+op floor &t3 &t2
+sensor &t4 target:9:6 @y
+op floor &t5 &t4
+print "[accent]("
+print &t3
+print ", "
+print &t5
+print ")[]\n"
+print target:9:6
+print "\n"
+printflush message1
+jump 26 always
+print "[red]NOT FOUND[]"
+printflush message1
+write 0 cell1 0
+end
+radar enemy any any distance @this 1 target:31:8
+set i:39:13 0
+op lessThan &t0:findTarget:29:0 i:39:13 @links
+op equal &t1:findTarget:29:0 target:31:8 0
+op land &t2:findTarget:29:0 &t0:findTarget:29:0 &t1:findTarget:29:0
+jump 38 equal &t2:findTarget:29:0 0
+getlink building:40:14 i:39:13
+radar enemy any any distance building:40:14 1 buildingRadar:41:14
+set target:31:8 buildingRadar:41:14
+op add i:39:13 i:39:13 1
+jump 29 always
+set &ffindTarget:29:0 target:31:8
+set @counter &rfindTarget:29:0
