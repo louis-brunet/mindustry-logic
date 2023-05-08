@@ -64,7 +64,7 @@ print target:60:10
 sensor &t4:unitAct:57:0 target:60:10 @health
 jump 68 greaterThan &t4:unitAct:57:0 0
 print "\ntarget is dead"
-ucontrol stop
+ucontrol targetp @unit 0
 jump 77 always
 print "\ntarget is alive"
 sensor x:50:24 target:60:10 @x
@@ -94,7 +94,7 @@ print "no target found ("
 print target:60:10
 print ")"
 printflush message2
-ucontrol stop
+ucontrol targetp @unit 0
 sensor radius:50:30 @unit @range
 ucontrol within idleX:7:4 idleY:8:4 radius:50:30 &t0:goToLocation:50:0 0
 jump 101 notEqual &t0:goToLocation:50:0 0

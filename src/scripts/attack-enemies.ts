@@ -71,7 +71,7 @@ function unitAct () {
         if (target.health <= 0) {
             print('\ntarget is dead');
 
-            unitControl.stop();
+            unitControl.targetp({unit: Vars.unit, shoot: false});
         } else {
             print('\ntarget is alive');
             
@@ -87,7 +87,7 @@ function unitAct () {
         print`no target found (${target})`;
         printFlush(msgDebug);
 
-        unitControl.stop();
+        unitControl.targetp({unit: Vars.unit, shoot: false});
         goToLocation({x: idleX, y: idleY, radius: Vars.unit.range});
         
         // mine ? 
