@@ -111,7 +111,7 @@ function unitAct () {
                 goToLocation({x, y, radius: Vars.unit.range});
                 unitControl.target({x, y, shoot: true});
             } else {
-                print`no target found (${target})`;
+                print`radar found no targets (status=${status})`;
             }
         } else {
             print`no target found (${target})`;

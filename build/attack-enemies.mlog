@@ -114,8 +114,8 @@ jump 114 notEqual &t0:goToLocation:54:0 0
 ucontrol approach x:107:27 y:107:30 radius:54:30
 ucontrol target x:107:27 y:107:30 1
 jump 119 always
-print "no target found ("
-print target:81:10
+print "radar found no targets (status="
+print status:107:19
 print ")"
 jump 128 always
 print "no target found ("
