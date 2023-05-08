@@ -13,12 +13,13 @@ if (target) {
     memResult[1] = target.x;
     memResult[2] = target.y;
 
+    print`Status: [green]${memResult[0]} FOUND[]\n`;
     print`Target\n`;
     print`[accent](${Math.floor(target.x)}, ${Math.floor(target.y)})[]\n`;
     print`${target}\n`;
     printFlush(msgStd);
 } else {
-    print`[red]NOT FOUND[]`;
+    print`Status: [red]${memResult[0]} NOT FOUND[]\n`;
     printFlush(msgStd);
     memResult[0] = _STATUS_NOT_FOUND;
 }
