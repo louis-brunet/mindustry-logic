@@ -1,0 +1,8 @@
+set cellIn:1:4 cell1
+set cellOut:2:4 cell1
+read status:6:7 cellIn:1:4 0
+read x:6:15 cellIn:1:4 1
+read y:6:18 cellIn:1:4 2
+write status:6:7 cellOut:2:4 0
+write x:6:15 cellOut:2:4 1
+write y:6:18 cellOut:2:4 2

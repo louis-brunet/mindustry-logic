@@ -2,8 +2,8 @@ const _STATUS_NOT_FOUND = 0;
 const _STATUS_FOUND_SELF = 1;
 const _STATUS_FOUND_NEIGHBOR = 2; // TODO multiple radars
 
-const msgStd = getBuilding('message1');
-const cellResult = getBuilding('cell1');
+let msgStd = getBuilding('message1');
+let cellResult = getBuilding('cell1');
 const memResult = new Memory(cellResult);
 
 const target = findTarget();

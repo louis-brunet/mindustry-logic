@@ -1,13 +1,15 @@
-set &rfindTarget:30:0 2
-jump 33 always
+set msgStd:5:4 message1
+set cellResult:6:4 cell1
+set &rfindTarget:30:0 4
+jump 35 always
 set target:9:6 &ffindTarget:30:0
-jump 26 equal target:9:6 0
-write 1 cell1 0
+jump 28 equal target:9:6 0
+write 1 cellResult:6:4 0
 sensor &t0 target:9:6 @x
-write &t0 cell1 1
+write &t0 cellResult:6:4 1
 sensor &t1 target:9:6 @y
-write &t1 cell1 2
-read &t2 cell1 0
+write &t1 cellResult:6:4 2
+read &t2 cellResult:6:4 0
 print "Status: [green]"
 print &t2
 print " FOUND[]\n"
@@ -22,25 +24,25 @@ print ", "
 print &t6
 print ")[]\n"
 print target:9:6
-printflush message1
-jump 32 always
-read &t0 cell1 0
+printflush msgStd:5:4
+jump 34 always
+read &t0 cellResult:6:4 0
 print "Status: [red]"
 print &t0
 print " NOT FOUND[]"
-printflush message1
-write 0 cell1 0
+printflush msgStd:5:4
+write 0 cellResult:6:4 0
 end
 radar enemy any any distance @this 1 target:32:8
 set i:40:13 0
 op lessThan &t0:findTarget:30:0 i:40:13 @links
 op equal &t1:findTarget:30:0 target:32:8 0
 op land &t2:findTarget:30:0 &t0:findTarget:30:0 &t1:findTarget:30:0
-jump 44 equal &t2:findTarget:30:0 0
+jump 46 equal &t2:findTarget:30:0 0
 getlink building:41:14 i:40:13
 radar enemy any any distance building:41:14 1 buildingRadar:42:14
 set target:32:8 buildingRadar:42:14
 op add i:40:13 i:40:13 1
-jump 35 always
+jump 37 always
 set &ffindTarget:30:0 target:32:8
 set @counter &rfindTarget:30:0
