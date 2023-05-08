@@ -1,8 +1,20 @@
 set cellIn:1:4 cell1
 set cellOut:2:4 cell2
-read status:6:7 cellIn:1:4 0
-read x:6:15 cellIn:1:4 1
-read y:6:18 cellIn:1:4 2
-write status:6:7 cellOut:2:4 0
-write x:6:15 cellOut:2:4 1
-write y:6:18 cellOut:2:4 2
+set msgDebug:3:4 message1
+read status:8:7 cellIn:1:4 0
+read x:8:15 cellIn:1:4 1
+read y:8:18 cellIn:1:4 2
+write status:8:7 cellOut:2:4 0
+write x:8:15 cellOut:2:4 1
+write y:8:18 cellOut:2:4 2
+print "Wrote:\n"
+print "status=[accent]"
+print status:8:7
+print "[]\n"
+print "x=[accent]"
+print x:8:15
+print "[]\n"
+print "y=[accent]"
+print y:8:18
+print "[]"
+printflush msgDebug:3:4
