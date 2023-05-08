@@ -2,6 +2,7 @@ const _UTYPE_DEFAULT: UnitSymbol = getVar<UnitSymbol>('@new-horizon-pester');
 const _IDLE_X_DEFAULT = Vars.thisx;
 const _IDLE_Y_DEFAULT = Vars.thisy;
 const _PID_DEFAULT = 2;
+const _RADAR_NOT_FOUND = 0;
 
 let PID = _PID_DEFAULT;
 let idleX = _IDLE_X_DEFAULT;
@@ -9,6 +10,8 @@ let idleY = _IDLE_Y_DEFAULT;
 
 const msgStd = getBuilding('message1');
 const msgDebug = getBuilding('message2');
+const cellTarget = getBuilding('cell1');
+const memTarget = new Memory(cellTarget);
 
 unitBind(_UTYPE_DEFAULT);
 if (!Vars.unit) endScript();
@@ -79,14 +82,14 @@ function unitAct () {
         // found target enemy
         print`PID=${PID}\n`;
         print`${Vars.unit}@(${Math.floor(Vars.unit.x)}, ${Math.floor(Vars.unit.y)})\n`;
-        print`found target: ${target}`;
+        print`found target: [accent]${target}[]`;
 
         if (target.health <= 0) {
-            print('\ntarget is dead');
+            print('\ntarget is [red]dead[]');
 
             unitControl.targetp({unit: Vars.unit, shoot: false});
         } else {
-            print('\ntarget is alive');
+            print('\ntarget is [green]alive[]');
             
             goToLocation({ x: target.x, y: target.y, radius: Vars.unit.range - 1 });
             unitControl.targetp({unit: target, shoot: true});
@@ -97,12 +100,24 @@ function unitAct () {
         // no enemies
         print`PID=${PID}\n`;
         print`${Vars.unit}@(${Math.floor(Vars.unit.x)}, ${Math.floor(Vars.unit.y)})\n`;
-        print`no target found (${target})`;
-        printFlush(msgDebug);
-
-        unitControl.targetp({unit: Vars.unit, shoot: false});
-        goToLocation({x: idleX, y: idleY, radius: Vars.unit.range});
         
+        // use radar processor
+        if (cellTarget) {
+            const [status, x, y] = memTarget;
+            if (status !== _RADAR_NOT_FOUND) {
+                print`using radar target [accent](${x}, ${y})[]`;
+                
+                goToLocation({x, y, radius: Vars.unit.range});
+                unitControl.target({x, y, shoot: true});
+            } else {
+                print`no target found (${target})`;
+            }
+        } else {
+            print`no target found (${target})`;
+            unitControl.targetp({unit: Vars.unit, shoot: false});
+            goToLocation({x: idleX, y: idleY, radius: Vars.unit.range});
+        }
+        printFlush(msgDebug);
         // mine ? 
     }
 }
