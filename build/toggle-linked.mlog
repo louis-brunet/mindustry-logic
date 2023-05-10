@@ -1,7 +1,9 @@
 set toggle:1:4 switch1
 sensor enabled:2:6 toggle:1:4 @enabled
 set i:4:9 0
-jump 8 greaterThanEq i:4:9 @links
+jump 10 greaterThanEq i:4:9 @links
+getlink linked:5:10 i:4:9
+jump 8 equal linked:5:10 toggle:1:4
 getlink &t0 i:4:9
 control enabled &t0 enabled:2:6
 op add i:4:9 i:4:9 1
